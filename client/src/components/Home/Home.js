@@ -33,7 +33,7 @@ export default function Home() {
   const [themes, setThemes] = useState([]);
   const num = 15;
   const [timeLeft, setTimeLeft] = useState(num);
-  const { visibleBtn, setVisibleBtn } = useContext(UserContext);
+  const { score, visibleBtn, setVisibleBtn } = useContext(UserContext);
   // const [isOpen, toggleIsOpen] = useReducer((state) => !state, false);
   useEffect(() => {
     const timerFunc = setTimeout(() => {
@@ -62,6 +62,7 @@ export default function Home() {
 
   return (
     <div className="mainpage usereducer">
+      <div>{score}</div>
       <div>{themes.map((el) => (
         <div>{el.title}:{el.Items.map((elt) => (
           <div>{elt.id}

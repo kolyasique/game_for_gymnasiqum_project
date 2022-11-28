@@ -30,6 +30,7 @@ function App() {
                 <Home />
               </UserContextProvider>
             ) : (<Auth />)}
+
         </div>
 
       )
