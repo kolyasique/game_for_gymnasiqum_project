@@ -33,10 +33,6 @@ export default function QuestionForm({ question, id, value }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(id, inputValue, value);
-    // dispatch({
-    //   type: 'disable',
-    //   // payload: -1,
-    // });
 
     const url = 'http://localhost:6622/api/tt/answer';
     fetch(url, {
@@ -54,9 +50,11 @@ export default function QuestionForm({ question, id, value }) {
       .then((res) => {
         if (res.message === 'Ответ верный') {
           setMessage('Ответ верный');
+          setScore(res.score);
         } else {
           setMessage('Ответ неверный');
           setScore(res.score);
+          console.log(score);
         }
       })
       .catch(console.error)
@@ -67,13 +65,14 @@ export default function QuestionForm({ question, id, value }) {
         setTimeout(() => { setMessage(''); }, 1000);
       });
   };
+
+  console.log(score, 'score для записи');
   return (
     <form onSubmit={handleSubmit}>
       <div>{question}</div>
       <input type="text" name="answer" placeholder="Ваш ответ" value={inputValue.answer} onChange={handleInput} />
       <button> Ответить</button>
       <div>{ message }</div>
-      <div>{ score }</div>
     </form>
   );
 }
