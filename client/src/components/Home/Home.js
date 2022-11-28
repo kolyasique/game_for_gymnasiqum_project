@@ -6,7 +6,9 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/button-has-type */
 /* eslint-disable max-len */
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  useContext, useEffect, useReducer, useState,
+} from 'react';
 import './Home.css';
 // import reducer from './reducer';
 // import { increment, decrement, obnulit } from './actiongenerators';
@@ -16,6 +18,12 @@ import { UserContext } from '../../context/User.context';
 export default function Home() {
   const [modal, setModal] = useState(false);
   const { user, setUser } = useContext(UserContext);
+  const [modalParams, setModalParams] = useState({
+    visible: false,
+    id: null,
+    question: '',
+    value: null,
+  });
 
   console.log(user, 'Это данные юзера');
   // useReduser принимает два аргумента. 1 - функеция обработчик, 2 - стартовое состояние объекта
@@ -23,9 +31,10 @@ export default function Home() {
   //   counter: 0,
   // });
   const [themes, setThemes] = useState([]);
-  const num = 5;
+  const num = 15;
   const [timeLeft, setTimeLeft] = useState(num);
   const { visibleBtn, setVisibleBtn } = useContext(UserContext);
+  // const [isOpen, toggleIsOpen] = useReducer((state) => !state, false);
   useEffect(() => {
     const timerFunc = setTimeout(() => {
       setTimeLeft(timeLeft - 1);
@@ -55,20 +64,39 @@ export default function Home() {
     <div className="mainpage usereducer">
       <div>{themes.map((el) => (
         <div>{el.title}:{el.Items.map((elt) => (
-          <>
-            {elt.Itemstatuses.find((e) => (e.user_id == user.id && e.item_id == elt.id)) ? (
-              <button disabled onClick={() => { setModal(true); setTimeLeft(5); }}>{elt.value}</button>
+          <div>
+            {elt.Itemstatuses.find((e) => (e.user_id == user.id && e.item_id == elt.id && e.result_id == user.result_id)) ? (
+              <button
+                key={elt.id}
+                disabled
+                onClick={() => {
+                  setModal(true); setModalParams({
+                    visible: true, id: elt.id, question: elt.question, value: elt.value,
+                  }); setTimeLeft(15);
+                }}
+              >{elt.value}
+              </button>
             ) : (
-              <button disabled={visibleBtn} onClick={() => { setModal(true); setTimeLeft(5); }}>{elt.value}</button>
+              <button
+                key={elt.id}
+                id={elt.id}
+                disabled={visibleBtn.includes(elt.id)}
+                onClick={() => {
+                  setVisibleBtn([...visibleBtn, elt.id]);
+                  setModal(true); setTimeLeft(15); setModalParams({
+                    visible: true, id: elt.id, question: elt.question, value: elt.value,
+                  }); console.log('в модал идет:', elt.question, elt.value);
+                }}
+              >{elt.value}
+              </button>
             )}
-            <MyModal visible={modal} setVisible={setModal} question={elt.question} timeLeft={timeLeft} id={elt.id} />
-          </>
+          </div>
         ))}
-
+          {/* setVisibleBtn(true); */}
         </div>
       ))}
       </div>
-
+      <MyModal key={modalParams.id} visible={modal} setVisible={setModal} question={modalParams.question} timeLeft={timeLeft} id={modalParams.id} value={modalParams.value} />
     </div>
   );
 }

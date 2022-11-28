@@ -7,8 +7,9 @@ export const UserContext = React.createContext();
 
 export default function UserContextProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [visibleBtn, setVisibleBtn] = useState(false);
+  const [visibleBtn, setVisibleBtn] = useState([]);
   const { setLoading } = useContext(GlobalContext);
+  // const [score, setScore] = useState(0);
 
   useEffect(() => {
     // abortcontroller - позволяет отменить запрос вручную (встроен в браузер)

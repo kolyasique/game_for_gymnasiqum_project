@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import React, { useContext } from 'react';
 import { UserContext } from '../../context/User.context';
 import './Header.css';
@@ -7,6 +8,8 @@ import logo2 from './logo.svg';
 // const win = window.sessionStorage;
 export default function Header() {
   const { user, setUser } = useContext(UserContext);
+  // const { score } = useContext(UserContext);
+  // console.log(score, 'Это скоре');
   const handleLogout = () => {
     fetch(
       'http://localhost:6622/api/auth/signout',

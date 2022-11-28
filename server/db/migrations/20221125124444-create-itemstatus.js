@@ -24,6 +24,14 @@ module.exports = {
         },
         onDelete: 'CASCADE',
       },
+      result_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Items',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+      },
       status: {
         type: Sequelize.BOOLEAN,
       },
