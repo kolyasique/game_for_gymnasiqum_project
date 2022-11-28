@@ -18,22 +18,21 @@ const formInitialState = {
 // }
 
 export default function QuestionForm({ question, id, value }) {
-  console.log(id);
   const [inputValue, setInputValue] = useState(formInitialState);
   const [message, setMessage] = useState('');
   // const { visibleBtn, setVisibleBtn } = useContext(UserContext);
   // const [state, dispatch] = useReducer(reducer, {
   //   visibleBtn: false,
   // });
-  // const { score, setScore } = useContext(UserContext);
-
+  const { score, setScore } = useContext(UserContext);
+  // const [scorew, setScorew] = useState(0);
   const handleInput = (e) => {
     setInputValue({ ...inputValue, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(id, inputValue, value);
     // dispatch({
     //   type: 'disable',
     //   // payload: -1,
@@ -53,14 +52,11 @@ export default function QuestionForm({ question, id, value }) {
         return res.json();
       })
       .then((res) => {
-        // setScore(res.score);
-        console.log(res.message, 'Это рес');
         if (res.message === 'Ответ верный') {
           setMessage('Ответ верный');
-          console.log('Это сет скоре в форме');
         } else {
-          console.log(res.score, 'Это рес скоре в форме');
           setMessage('Ответ неверный');
+          setScore(res.score);
         }
       })
       .catch(console.error)
@@ -77,6 +73,7 @@ export default function QuestionForm({ question, id, value }) {
       <input type="text" name="answer" placeholder="Ваш ответ" value={inputValue.answer} onChange={handleInput} />
       <button> Ответить</button>
       <div>{ message }</div>
+      <div>{ score }</div>
     </form>
   );
 }

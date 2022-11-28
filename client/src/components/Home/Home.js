@@ -64,7 +64,7 @@ export default function Home() {
     <div className="mainpage usereducer">
       <div>{themes.map((el) => (
         <div>{el.title}:{el.Items.map((elt) => (
-          <div>
+          <div>{elt.id}
             {elt.Itemstatuses.find((e) => (e.user_id == user.id && e.item_id == elt.id && e.result_id == user.result_id)) ? (
               <button
                 key={elt.id}

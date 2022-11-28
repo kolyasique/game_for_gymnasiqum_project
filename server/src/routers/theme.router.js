@@ -23,20 +23,26 @@ router.post('/answer', async (req, res) => {
   const userAnswer = req.body.inputValue.answer;
   const questionValue = req.body.value;
   const resultUserGameId = req.session.user.result_id;
-  console.log(req.body);
+  console.log(req.body,'_+_+_+_+_+_+_+_+_+_+_');
   const findItemById = await Item.findOne({ where: { id: userAnswerId } });
   console.log(findItemById);
   const findUserResult = await Result.findOne({ where: { id: resultUserGameId } });
   if ((findItemById.answer).toLowerCase() === userAnswer.toLowerCase()) {
     const changeStatus = await Itemstatus.create({
-      user_id: req.session.user.id, item_id: userAnswerId, result_id: req.session.user.result_id, status: true,
+      user_id: Number(req.session.user.id), 
+      item_id: Number(userAnswerId), 
+      result_id: Number(req.session.user.result_id), 
+      status: true,
     });
     console.log('true');
     const increment = await findUserResult.increment('total_score', { by: questionValue });
-    res.json({ message: 'Ответ верный', score:increment.total_score });
+    res.json({ message: 'Ответ верный', score: increment.total_score });
   } else {
     const changeStatus = await Itemstatus.create({
-      user_id: req.session.user.id, item_id: userAnswerId, result_id: req.session.user.result_id, status: false,
+      user_id: +req.session.user.id,
+       item_id: +userAnswerId,
+        result_id: +req.session.user.result_id,
+         status: false,
     });
     console.log('false');
     const decrement = await findUserResult.decrement('total_score', { by: questionValue });
