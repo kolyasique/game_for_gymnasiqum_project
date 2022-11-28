@@ -1,0 +1,39 @@
+.nav {
+    display: flex;
+    height: 10vh;
+    background: rgb(218, 255, 148);
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid cadetblue;
+  }
+  
+  .nav-logo {
+    height: 8vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    nav-logo {
+      animation: nav-logo-spin infinite 20s linear;
+    }
+  }
+  @keyframes nav-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .nav-logout {
+    width: 75px;
+    height: 35px;
+    background-color: cadetblue;
+    border-radius: 20px;
+    transition: all 0.5s;
+  }
+  .nav-logout:hover {
+    background-color: aquamarine;
+  }

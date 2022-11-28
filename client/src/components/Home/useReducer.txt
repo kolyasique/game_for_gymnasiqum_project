@@ -1,0 +1,148 @@
+useReducer - замена useState для сложных состояний, или для состояний
+            которые должны распространяться на протяжении всего проекта 
+            и много где могут одновременно меняться
+
+ В отличии от useState, useReducer возвращает нам не функцию, которая устанавливает новое значение
+        переменной, а которая вызывает функцию самого редьюсера
+_ _ _ _ _ _ _ _
+Этапы:
+1. Перед return в компоненте, вызываем useReducer()
+
+    const [state, dispatch] = useReducer(reducer, {
+    counter: 1,
+  });
+
+  P.S: useReduser принимает два аргумента:
+   1 - функция обработчик (reducer, типа псевдонима для dispatch), 
+   2 - стартовое состояние объекта
+  PP.S: сам useReducer представляет из себя [state, dispatch], где:
+        state - начальное значение как в useState
+        dispatch - псевдоним функции reducer, но уже имеет обертку чтобы в него приходили state и action
+2. Создаем функцию reducer вне функции компонента:
+
+    function reducer(state, action){
+        return {
+         counter:1
+         }
+        }
+    P.S: Функция обработчик reducer принимает в аргументы 2 параметра:
+         1 - state - текущее состояние
+         2 - action - действие
+     Функция reducer должна возвращать нам новое состояние, 
+        а не видоизмененное старое
+
+3. Создаем кнопку, которая будет считать количество нажатий:
+         
+         <button onClick={handlerClick}>Меня нажали {state.counter} раз</button>
+
+4. Прописываем функцию после useReducer - handlerClick, которая будет вызывать dispatch у useReducer,
+    а в dispatch мы будем передавать объект который называется действием:
+
+        const handlerClick =() =>{
+            dispatch({
+                type: 'incremenate',
+                payload: 1
+            })
+        }
+    P.S: у dispatch всегда имеется 2 параметра:
+        1. type: '' - который описывает действие
+        2. payload: {} - полезная нагрузка (в случае с кнопкой указываем на сколько увеличиваем значение)
+
+____________
+console.log(state, action); в функции reducer, отобразит нам:
+    state: {counter: 1} - state из useReducer() 
+    action: {type: 'incremenate', payload: 1} - dispatch из userReducer()
+____________
+
+5. Дописываем функцию reducer конструкцией switch/case для того, 
+    чтобы происходило определенное действие с соответствующим type,
+
+    function reducer(state, action){
+        switch(action.type){
+            case 'incremenate':
+                return {
+                    counter: state.counter + 1
+                }
+        }
+    }
+
+    P.S: Здесь мы для объекта в dispatch с type 'increment' сделали действие,
+         которое увеличивает state значение counter из useReducer на 1
+
+6. Кнопка готова, теперь сделаем несколько кнопок, управляющих одним значением:
+    Элемент, который будет отображать счет - выносим отдельно, 
+    и прописываем в нем {state.counter}
+    Прописываем внутри каждой кнопки : 
+         
+         -onClick={() =>{
+            dispatch({
+                type: 'incremenate', // или 'decrement'
+                payload: 1 //или '2' и другое иное число, на которое у нас будет производится операция
+            })
+        }
+7. Далее мы моем убрать функцию handleSubmit, 
+    и добавить еще один вариант 'decrement' в конструкцию switch/case.
+    В самой конструкции, мы вычитаем указанное в payload значение,
+    и это будет выглядеть как state.counter - action.payload.
+    P.S: Это потому что, в action у нас передается dispatch
+
+        function reducer(state, action) {
+    switch (action.type) {
+        case 'incremenate':
+        return {
+            counter: state.counter + action.payload,
+        };
+        case 'decrement':
+        return {
+            counter: state.counter - action.payload,
+        };
+    }
+    }
+
+8. Делаем boilerplate - выносим type у payload за пределы функции
+    и кладем их в константы. Соответственно по каждому вызову dispatch у кнопки,
+    type будет равен не строке, а константе
+
+    const INCREMENT = 'increment';
+    const DECREMENT = 'decrement';  
+
+9. Создаем action-функции(increment, decrement)  для того, 
+    чтобы класть их в dispatch у кнопок
+
+    const decrement = (payload) => ({
+        type: DECREMENT,
+        payload,
+        });
+     const increment = (payload) => ({
+        type: INCREMENT,
+        payload,
+        });
+    
+    Кнопки будут выглядеть следующим образом:
+
+      <button onClick={() => { dispatch(decrement(2)); }}> -2</button>
+      <button onClick={() => { dispatch(decrement(1)); }}> -1</button>
+      <span>{state.counter}</span>
+      <button onClick={() => { dispatch(increment(1)); }}> +1</button>
+      <button onClick={() => { dispatch(increment(2)); }}> +2</button>
+
+10. boilerplate, actiongenerators,reducer - обычно выносятся в отдельные файлы,
+     поэтому создадим соответсвующие файлы, в actiongenerators и reducer импортируем boilerplate
+
+
+     ///////
+        <h1>try userReducer()</h1>
+      <h2>
+        useReducer - замена useState для сложных состояний, или для состояний
+        которые должны распространяться на протяжении всего проекта и много где могут одновременно меняться
+      </h2>
+      <h3>
+        В отличии от useState, useReducer возвращает нам не функцию, которая устанавливает новое значение
+        переменной, а которая вызывает функцию самого редьюсера
+      </h3>
+      <button onClick={() => { dispatch(decrement(2)); }}> -2</button>
+      <button onClick={() => { dispatch(decrement(1)); }}> -1</button>
+      <span>{state.counter}</span>
+      <button onClick={() => { dispatch(increment(1)); }}> +1</button>
+      <button onClick={() => { dispatch(increment(2)); }}> +2</button>
+      <button onClick={() => { dispatch(obnulit()); }}> Обнулить</button>
