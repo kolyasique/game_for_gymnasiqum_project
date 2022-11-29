@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
+import { Link } from 'react-router-dom';
 import React, { useContext } from 'react';
 import { UserContext } from '../../context/User.context';
 import './Header.css';
@@ -28,8 +29,11 @@ export default function Header() {
       <img className="nav-logo" src={logo2} alt="nav-logo-beaver" />
       {user
       && (
-
-        <button className="nav-logout" type="button" onClick={handleLogout}>SignOut</button>
+        <>
+          <button className="nav-logout" style={{ textDecoration: 'none' }} type="button"><Link to="/">Main</Link></button>
+          <button className="nav-logout" type="button"><Link to="/stats">Stats</Link></button>
+          <button className="nav-logout" type="button" onClick={handleLogout}>SignOut</button>
+        </>
 
       )}
     </div>

@@ -1,7 +1,8 @@
+/* eslint-disable max-len */
 const router = require('express').Router();
 
 const {
-  Theme, Item, Itemstatus, Result,
+  Theme, Item, Itemstatus, Result, User,
 } = require('../../db/models');
 
 router.get('/', async (req, res) => {
@@ -23,15 +24,15 @@ router.post('/answer', async (req, res) => {
   const userAnswer = req.body.inputValue.answer;
   const questionValue = req.body.value;
   const resultUserGameId = req.session.user.result_id;
-  console.log(req.body,'_+_+_+_+_+_+_+_+_+_+_');
+  console.log(req.body, '_+_+_+_+_+_+_+_+_+_+_');
   const findItemById = await Item.findOne({ where: { id: userAnswerId } });
   console.log(findItemById);
   const findUserResult = await Result.findOne({ where: { id: resultUserGameId } });
   if ((findItemById.answer).toLowerCase() === userAnswer.toLowerCase()) {
     const changeStatus = await Itemstatus.create({
-      user_id: Number(req.session.user.id), 
-      item_id: Number(userAnswerId), 
-      result_id: Number(req.session.user.result_id), 
+      user_id: Number(req.session.user.id),
+      item_id: Number(userAnswerId),
+      result_id: Number(req.session.user.result_id),
       status: true,
     });
     console.log('true');
@@ -40,15 +41,26 @@ router.post('/answer', async (req, res) => {
   } else {
     const changeStatus = await Itemstatus.create({
       user_id: +req.session.user.id,
-       item_id: +userAnswerId,
-        result_id: +req.session.user.result_id,
-         status: false,
+      item_id: +userAnswerId,
+      result_id: +req.session.user.result_id,
+      status: false,
     });
     console.log('false');
     const decrement = await findUserResult.decrement('total_score', { by: questionValue });
-    res.json({ message: 'Ответ НЕверный', score:decrement.total_score});
+    res.json({ message: 'Ответ НЕверный', score: decrement.total_score });
   }
   //  const addScore = await Result.update({})
+});
+
+router.get('/stats', async (req, res) => {
+  try {
+    const stats = await User.findAll({ include: Result });
+    const data = stats.map((el) => [el.login, Math.max.apply(null, el.Results.map((item) => item.total_score))])
+      .sort((a, b) => b[1] - a[1]);
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = router;

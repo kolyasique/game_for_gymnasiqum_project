@@ -1,0 +1,20 @@
+.table {
+  display: flex;
+  justify-content: center;
+}
+
+TABLE {
+  border-collapse: collapse; /* Убираем двойные линии между ячейками */
+  width: 300px; /* Ширина таблицы */
+ }
+ TH, TD {
+  border: 1px solid black; /* Параметры рамки */
+  text-align: center; /* Выравнивание по центру */
+  padding: 4px; /* Поля вокруг текста */
+ }
+ TH {
+  background: rgb(218, 255, 148);; /* Цвет фона ячейки */
+  height: 40px; /* Высота ячеек */
+  vertical-align: bottom; /* Выравнивание по нижнему краю */
+  padding: 0; /* Убираем поля вокруг текста */
+ }

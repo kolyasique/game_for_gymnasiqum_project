@@ -23,6 +23,7 @@ export default function UserContextProvider({ children }) {
     })
       .then((res) => res.json())
       .then((res) => {
+
         // if (res.msg === 'Пользователя не существует!') {
         //   setUser(null);
         // } else {
