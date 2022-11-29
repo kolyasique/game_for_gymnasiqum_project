@@ -13,7 +13,7 @@ export default function ModalTimer({ timeLeft, setVisible }) {
 
   return (
     <div>
-      <p className="threeP">{timeLeft > 0 ? (<>{timeLeft}</>) : (<p>{setVisible(false)}</p>)}</p>
+      <p className="threeP">{timeLeft > 0 ? (<>{timeLeft}</>) : (<p>Время вышло!</p>)}</p>
     </div>
   );
 }

@@ -23,15 +23,15 @@ export default function UserContextProvider({ children }) {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.msg === 'Пользователя не существует!') {
-          setUser(null);
-        } else {
-          setUser(res.user);
-          setLoading(false);
-        }
+        // if (res.msg === 'Пользователя не существует!') {
+        //   setUser(null);
+        // } else {
+        console.log(res, 'Это рес в ЮЗЕР КОНТЕКСТ');
+        setUser(res);
+        // }
       })
-      .catch(console.error);
-
+      .catch(console.error)
+      .finally(() => setLoading(false));
     return () => {
       abortController.abort();
     };

@@ -23,14 +23,17 @@ function App() {
         <div>
 
           <Header />
+          <UserContextProvider>
+            {console.log(user, 'Это юзер в аппе2222')}
+            {
+                user
+                  ? (
 
-          {user
-            ? (
-              <UserContextProvider>
-                <Home />
-              </UserContextProvider>
-            ) : (<Auth />)}
+                    <Home />
 
+                  ) : (<Auth />)
+}
+          </UserContextProvider>
         </div>
 
       )
