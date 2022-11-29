@@ -1,0 +1,42 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+.questionform{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-around;
+padding: 15px;
+margin: 10px;
+height: 65%;
+background-color: rgb(216, 216, 216);
+font-family: 'Nanum Gothic', sans-serif;
+box-shadow: 0 0 20px rgba(0,0,0,0.5); 
+}
+.question{
+    display: flex;
+    position: center;
+    font-size: 14px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+.questioninput{
+    display: flex;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+.submitquestionbtn{
+    width: 100px;
+    height: 35px;
+    font-size: 14px;
+    font-weight: 200;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    transition: all 0.2s;
+}
+.submitquestionbtn:hover {
+    background-color: rgb(179, 179, 179);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); 
+  }
+.quesionstatus{
+    display: flex;
+    font-family: 'Nanum Gothic', sans-serif;
+}

@@ -4,8 +4,8 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable no-undef */
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/User.context';
-
 // import { useNavigate } from 'react-router-dom';
 import './Auth.css';
 import './toggle.css';
@@ -72,31 +72,54 @@ export default function Auth() {
   // };
 
   return (
-    <div className="authform">
-      <form onSubmit={handleSubmit}>
-        <div className={`mb-3 ${isSignUp ? 'visible' : 'invisible'}`}>
-          <label className="form-label ">Login</label>
+  // <div className="authform">
+  //   <form onSubmit={handleSubmit}>
+  //     <div className={`mb-3 ${isSignUp ? 'visible' : 'invisible'}`}>
+  //       <label className="form-label ">Login</label>
+  //       <input type="text" className="form-control" value={form.login}
+  // name="login" onChange={handleInput} />
+  //     </div>
+
+  //     <div className="mb-3">
+  //       <label className="form-label">Password</label>
+  //       <input type="password" className="form-control"
+  // value={form.password} name="password" onChange={handleInput} />
+  //     </div>
+
+  //     <div className="toggle-switch">
+  //       <p>Sign Up</p>
+  //       <div>
+  //         <input className="toggle" type="checkbox" id="toggle"
+  // onClick={handleFormChange} checked={!isSignUp} />
+  //         <label className="toggle-label" htmlFor="toggle" />
+  //       </div>
+  //       <p>Sign In</p>
+  //     </div>
+
+  //     <button type="submit" className="btn btn-primary">Войти</button>
+  //     <div>..</div>
+  //   </form>
+  // </div>
+    <div>
+      <form className="authform" onSubmit={handleSubmit}>
+        <div className="form-input">
+          <label className="form-label">Логин</label>
           <input type="text" className="form-control" value={form.login} name="login" onChange={handleInput} />
         </div>
-
-        <div className="mb-3">
-          <label className="form-label">Password</label>
+        <div className="form-input">
+          <label className="form-label">Пароль</label>
           <input type="password" className="form-control" value={form.password} name="password" onChange={handleInput} />
         </div>
-
         <div className="toggle-switch">
-          <p>Sign Up</p>
+          <p className="form-label">Рега</p>
           <div>
             <input className="toggle" type="checkbox" id="toggle" onClick={handleFormChange} checked={!isSignUp} />
             <label className="toggle-label" htmlFor="toggle" />
           </div>
-          <p>Sign In</p>
+          <p className="form-label">Лога</p>
         </div>
-
-        <button type="submit" className="btn btn-primary">Submit</button>
-        <div>..</div>
+        <button type="submit" className="buttonSubmit">Подтвердить</button>
       </form>
     </div>
-
   );
 }

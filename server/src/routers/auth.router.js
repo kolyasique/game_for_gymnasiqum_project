@@ -1,16 +1,23 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 
-const { User } = require('../../db/models');
+const { User, Result } = require('../../db/models');
 
 router.get('/', (req, res) => {
-  res.json({ user: req.session.user || null });
-});
 
+  console.log(req.session)
+//    res.json( {user: {
+//     id: req.session.user?.id,
+//     name: req.session.user?.name,
+//     result_id: req.session.user?.result_id,
+//   } || null });
+// });
+  res.json( req.session.user || null );
+});
 router.post('/signup', async (req, res) => {
   try {
     const { login, password } = req.body;
-    console.log("Это данны с регистрации++++++++++ SIGNUP", login, password)
+    console.log('Это данны с регистрации++++++++++ SIGNUP', login, password);
     const hashedPassword = await bcrypt.hash(password, 10);
     const createUser = await User.create({ login, password: hashedPassword });
     const newUser = createUser.get();
@@ -18,9 +25,11 @@ router.post('/signup', async (req, res) => {
     delete newUser.createdAt;
     delete newUser.updatedAt;
 
+    const createNewResult = await Result.create({ user_id: newUser.id, total_score: 0 })
     req.session.user = {
       id: newUser.id,
       name: newUser.login,
+      result_id: createNewResult.id
     };
     return res.json(newUser);
   } catch (error) {
@@ -31,21 +40,23 @@ router.post('/signup', async (req, res) => {
 router.post('/signin', async (req, res) => {
   try {
     const { login, password } = req.body;
-    console.log('+++++++++Это SIGNIN', login, password)
+    console.log('+++++++++Это SIGNIN', login, password);
     const findUser = await User.findOne({ where: { login }, raw: true });
     if (!findUser) {
-        console.log('Пользователя нет')
+      console.log('Пользователя нет');
       return res.status(401).json({ msg: 'Пользователя не существует!' });
     }
     const userIsFound = await bcrypt.compare(password, findUser.password);
     if (userIsFound) {
       delete findUser.password;
+      const createUserResult = await Result.create({ user_id: findUser.id, total_score: 0 });
 
       req.session.user = {
         id: findUser.id,
         name: findUser.login,
+        result_id: createUserResult.id,
       };
-      console.log('Пользователь есть, сеесия готова!')
+      console.log('Пользователь есть, сеесия готова!');
       return res.json(findUser);
     }
   } catch (error) {

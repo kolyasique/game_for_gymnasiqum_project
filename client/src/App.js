@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-// import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home/Home';
 import Header from './components/Header/Header';
 import Auth from './components/Auth/Auth';
+import Stats from './components/Stats/Stats';
 import { GlobalContext } from './context/Global.context';
 import UserContextProvider, { UserContext } from './context/User.context';
 
@@ -20,18 +21,22 @@ function App() {
       </div>
     )
       : (
-        <div>
-
+        <div className="all">
           <Header />
 
           {user
             ? (
               <UserContextProvider>
-                <Home />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                </Routes>
+                <Routes>
+                  <Route path="/stats" element={<Stats />} />
+                </Routes>
               </UserContextProvider>
             ) : (<Auth />)}
-        </div>
 
+        </div>
       )
   );
 }
