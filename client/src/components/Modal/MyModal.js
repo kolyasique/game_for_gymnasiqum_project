@@ -18,7 +18,7 @@ function MyModal({
     <div className={rootClasses.join(' ')} onClick={() => setVisible(false)}>
       <div className={cl.myModalContent} onClick={(e) => e.stopPropagation()}>
         {children}
-        <ModalTimer timeLeft={timeLeft} setVisible={setVisible} />
+        <ModalTimer timeLeft={timeLeft} />
         <QuestionForm question={question} id={id} setVisibleBtn={setVisibleBtn} value={value} />
       </div>
     </div>
