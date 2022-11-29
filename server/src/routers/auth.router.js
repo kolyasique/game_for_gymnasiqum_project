@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 
 const { User, Result } = require('../../db/models');
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   console.log(req.session)
-  res.json({ user: {
+  await res.json({ user: {
     id: req.session.user?.id,
     name: req.session.user?.name,
     result_id: req.session.user?.result_id,

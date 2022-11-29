@@ -10,6 +10,7 @@ export default function UserContextProvider({ children }) {
   const [visibleBtn, setVisibleBtn] = useState([]);
   const { setLoading } = useContext(GlobalContext);
   const [score, setScore] = useState(0);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     // abortcontroller - позволяет отменить запрос вручную (встроен в браузер)
@@ -42,7 +43,7 @@ export default function UserContextProvider({ children }) {
   }, []);
 
   const value = useMemo(() => ({
-    user, setUser, handleLogout, visibleBtn, setVisibleBtn, score, setScore,
+    user, setUser, handleLogout, visibleBtn, setVisibleBtn, score, setScore, modal, setModal,
   }));
 
   return (
