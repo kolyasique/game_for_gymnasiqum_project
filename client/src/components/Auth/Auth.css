@@ -1,10 +1,14 @@
 .authform {
+  display: flex;
+  flex-direction: column;
+  
     margin: auto;
     margin-top: 6rem;
     padding: 4rem;
     width: 30vw;
     max-width: 500px;
     min-width: 300px;
-    background-color: antiquewhite;
+    background-color: rgb(255, 145, 0);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); 
   }
   

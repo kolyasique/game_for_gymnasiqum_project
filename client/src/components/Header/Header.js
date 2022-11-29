@@ -18,6 +18,7 @@ export default function Header() {
       { credentials: 'include' },
     ).then((res) => {
       if (res.status === 200) {
+        localStorage.clear();
         setUser(null);
         // win.clear();
       }
@@ -30,9 +31,9 @@ export default function Header() {
       {user
       && (
         <>
-          <button className="nav-logout" style={{ textDecoration: 'none' }} type="button"><Link to="/">Main</Link></button>
-          <button className="nav-logout" type="button"><Link to="/stats">Stats</Link></button>
-          <button className="nav-logout" type="button" onClick={handleLogout}>SignOut</button>
+          <Link to="/"><button className="nav-logout" style={{ textDecoration: 'none' }} type="button">Главная</button></Link>
+          <Link to="/stats"><button className="nav-logout" type="button">Статистика</button></Link>
+          <Link to="/"><button className="nav-logout" type="button" onClick={handleLogout}>Exit</button></Link>
         </>
 
       )}

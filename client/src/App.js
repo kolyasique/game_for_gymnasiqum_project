@@ -21,17 +21,17 @@ function App() {
       </div>
     )
       : (
-        <div>
+        <div className="all">
           <Header />
 
-          <Routes>
-            <Route path="/stats" element={<Stats />} />
-          </Routes>
           {user
             ? (
               <UserContextProvider>
                 <Routes>
                   <Route path="/" element={<Home />} />
+                </Routes>
+                <Routes>
+                  <Route path="/stats" element={<Stats />} />
                 </Routes>
               </UserContextProvider>
             ) : (<Auth />)}

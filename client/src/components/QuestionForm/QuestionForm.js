@@ -21,6 +21,7 @@ const formInitialState = {
 export default function QuestionForm({ question, id, value }) {
   const [inputValue, setInputValue] = useState(formInitialState);
   const [message, setMessage] = useState('');
+  const { subDis, setSubDis } = useContext(UserContext);
   // const { visibleBtn, setVisibleBtn } = useContext(UserContext);
   // const [state, dispatch] = useReducer(reducer, {
   //   visibleBtn: false,
@@ -34,7 +35,7 @@ export default function QuestionForm({ question, id, value }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(id, inputValue, value);
-
+    setSubDis(true);
     const url = 'http://localhost:6622/api/tt/answer';
     fetch(url, {
       method: 'POST',
@@ -51,9 +52,11 @@ export default function QuestionForm({ question, id, value }) {
       .then((res) => {
         if (res.message === 'Ответ верный') {
           setMessage('Ответ верный');
+          localStorage.setItem('score', res.score);
           setScore(res.score);
         } else {
           setMessage('Ответ неверный');
+          localStorage.setItem('score', res.score);
           setScore(res.score);
           console.log(score);
         }
@@ -73,7 +76,7 @@ export default function QuestionForm({ question, id, value }) {
     <form onSubmit={handleSubmit} className={cl.questionform}>
       <div className={cl.question}>{question}</div>
       <input type="text" name="answer" placeholder="Ваш ответ" value={inputValue.answer} onChange={handleInput} className={cl.questioninput} />
-      <button className={cl.submitquestionbtn}> Ответить</button>
+      <button disabled={subDis} className={cl.submitquestionbtn}> Ответить</button>
       <div className={cl.questionstatus}>{ message }</div>
     </form>
   );
