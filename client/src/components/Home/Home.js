@@ -32,7 +32,7 @@ export default function Home() {
   //   counter: 0,
   // });
   const [themes, setThemes] = useState([]);
-  const num = 10;
+  const num = 30;
   const [timeLeft, setTimeLeft] = useState(num);
   const {
     score, visibleBtn, setVisibleBtn, setSubDis,
@@ -68,7 +68,7 @@ export default function Home() {
     <div className="mainpage usereducer">
       <div className="score">{localStorage.getItem('score') ? (<>{localStorage.getItem('score')}</>) : (0)}</div>
       <div className="themes">{themes.map((el) => (
-        <div className="items">{el.title}:{el.Items?.sort((a, b) => a.value - b.value).map((elt) => (
+        <div className="items"><div className="theme">{el.title}</div>{el.Items?.sort((a, b) => a.value - b.value).map((elt) => (
           <div className="item">
             {elt.Itemstatuses?.find((e) => (e.user_id == user.id && e.item_id == elt.id && e.result_id == user.result_id)) ? (
               <button
@@ -79,7 +79,7 @@ export default function Home() {
                   setSubDis(false);
                   setModal(true); setModalParams({
                     visible: true, id: elt.id, question: elt.question, value: elt.value,
-                  }); setTimeLeft(15);
+                  }); setTimeLeft(30);
                 }}
               >{elt.value}
               </button>
@@ -92,7 +92,7 @@ export default function Home() {
                 onClick={() => {
                   setSubDis(false);
                   setVisibleBtn([...visibleBtn, elt.id]);
-                  setModal(true); setTimeLeft(10); setModalParams({
+                  setModal(true); setTimeLeft(30); setModalParams({
                     visible: true, id: elt.id, question: elt.question, value: elt.value,
                   }); console.log('в модал идет:', elt.question, elt.value);
                 }}

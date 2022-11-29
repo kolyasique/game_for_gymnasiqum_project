@@ -7,6 +7,8 @@ const {
 
 router.get('/', async (req, res) => {
   try {
+    // const thisScore = await Result.findOne({where:{ user_id:req.session.user.id,
+    // }})
     // const created = await Theme.bulkCreate([{title: 'Эльбрус'},{title: 'Молодец'},{title: 'Беспонтовые вопросы'}])
     // const created2 = await Item.bulkCreate([{theme_id: 3, question:'Ачун?', answer:'А ничу нормально разговаривай', value:300},{theme_id: 3, question:'Когда?', answer:'Нормально', value:1500},{theme_id: 3, question:'Как дела?', answer:'Как давно не виделись', value:2000}])
     const allThemes = await Theme.findAll({ include: { model: Item, include: { model: Itemstatus } } });
@@ -54,10 +56,12 @@ router.post('/answer', async (req, res) => {
 
 router.get('/stats', async (req, res) => {
   try {
+    const yourStat = await Result.findAll({where: {user_id: +req.session.user.id}, raw:true})
     const stats = await User.findAll({ include: Result });
     const data = stats.map((el) => [el.login, Math.max.apply(null, el.Results.map((item) => item.total_score))])
       .sort((a, b) => b[1] - a[1]);
-    res.json(data);
+    // res.json(data);
+    res.json({data, yourStat})
   } catch (error) {
     console.log(error);
   }
