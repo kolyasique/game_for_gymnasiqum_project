@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
 import React, { useContext, useReducer, useState } from 'react';
+import cl from './QuestionForm.module.css';
 import { UserContext } from '../../context/User.context';
 
 const formInitialState = {
@@ -24,7 +25,7 @@ export default function QuestionForm({ question, id, value }) {
   // const [state, dispatch] = useReducer(reducer, {
   //   visibleBtn: false,
   // });
-  const { score, setScore } = useContext(UserContext);
+  const { setModal, score, setScore } = useContext(UserContext);
   // const [scorew, setScorew] = useState(0);
   const handleInput = (e) => {
     setInputValue({ ...inputValue, [e.target.name]: e.target.value });
@@ -63,16 +64,17 @@ export default function QuestionForm({ question, id, value }) {
         console.log('finally');
         setInputValue(formInitialState);
         setTimeout(() => { setMessage(''); }, 1000);
+        setTimeout(() => { setModal(false); }, 1500);
       });
   };
 
   console.log(score, 'score для записи');
   return (
-    <form onSubmit={handleSubmit}>
-      <div>{question}</div>
-      <input type="text" name="answer" placeholder="Ваш ответ" value={inputValue.answer} onChange={handleInput} />
-      <button> Ответить</button>
-      <div>{ message }</div>
+    <form onSubmit={handleSubmit} className={cl.questionform}>
+      <div className={cl.question}>{question}</div>
+      <input type="text" name="answer" placeholder="Ваш ответ" value={inputValue.answer} onChange={handleInput} className={cl.questioninput} />
+      <button className={cl.submitquestionbtn}> Ответить</button>
+      <div className={cl.questionstatus}>{ message }</div>
     </form>
   );
 }

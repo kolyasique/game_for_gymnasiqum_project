@@ -16,7 +16,7 @@ import MyModal from '../Modal/MyModal';
 import { UserContext } from '../../context/User.context';
 
 export default function Home() {
-  const [modal, setModal] = useState(false);
+  const { modal, setModal } = useContext(UserContext);
   const { user, setUser } = useContext(UserContext);
   const [modalParams, setModalParams] = useState({
     visible: false,
@@ -31,7 +31,7 @@ export default function Home() {
   //   counter: 0,
   // });
   const [themes, setThemes] = useState([]);
-  const num = 15;
+  const num = 10;
   const [timeLeft, setTimeLeft] = useState(num);
   const { score, visibleBtn, setVisibleBtn } = useContext(UserContext);
   // const [isOpen, toggleIsOpen] = useReducer((state) => !state, false);
@@ -40,6 +40,7 @@ export default function Home() {
       setTimeLeft(timeLeft - 1);
     }, 1000);
     if (timeLeft === 0) {
+      setModal(false);
       return clearTimeout(timerFunc);
     }
     return () => {
@@ -63,12 +64,13 @@ export default function Home() {
   return (
     <div className="mainpage usereducer">
       <div>{score}</div>
-      <div>{themes.map((el) => (
-        <div>{el.title}:{el.Items.map((elt) => (
-          <div>{elt.id}
-            {elt.Itemstatuses.find((e) => (e.user_id == user.id && e.item_id == elt.id && e.result_id == user.result_id)) ? (
+      <div className="themes">{themes.map((el) => (
+        <div className="items">{el.title}:{el.Items?.sort((a, b) => a.value - b.value).map((elt) => (
+          <div className="item">
+            {elt.Itemstatuses?.find((e) => (e.user_id == user.id && e.item_id == elt.id && e.result_id == user.result_id)) ? (
               <button
                 key={elt.id}
+                className="itembtn"
                 disabled
                 onClick={() => {
                   setModal(true); setModalParams({
@@ -80,11 +82,12 @@ export default function Home() {
             ) : (
               <button
                 key={elt.id}
+                className="itembtn"
                 id={elt.id}
                 disabled={visibleBtn.includes(elt.id)}
                 onClick={() => {
                   setVisibleBtn([...visibleBtn, elt.id]);
-                  setModal(true); setTimeLeft(15); setModalParams({
+                  setModal(true); setTimeLeft(10); setModalParams({
                     visible: true, id: elt.id, question: elt.question, value: elt.value,
                   }); console.log('в модал идет:', elt.question, elt.value);
                 }}

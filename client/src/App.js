@@ -23,6 +23,7 @@ function App() {
       : (
         <div>
           <Header />
+
           <Routes>
             <Route path="/stats" element={<Stats />} />
           </Routes>
@@ -34,6 +35,7 @@ function App() {
                 </Routes>
               </UserContextProvider>
             ) : (<Auth />)}
+
         </div>
       )
   );
