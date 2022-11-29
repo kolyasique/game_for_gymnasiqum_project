@@ -25,9 +25,11 @@ router.post('/signup', async (req, res) => {
     delete newUser.createdAt;
     delete newUser.updatedAt;
 
+    const createNewResult = await Result.create({ user_id: newUser.id, total_score: 0 })
     req.session.user = {
       id: newUser.id,
       name: newUser.login,
+      result_id: createNewResult.id
     };
     return res.json(newUser);
   } catch (error) {

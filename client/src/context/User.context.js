@@ -11,6 +11,7 @@ export default function UserContextProvider({ children }) {
   const { setLoading } = useContext(GlobalContext);
   const [score, setScore] = useState(0);
   const [modal, setModal] = useState(false);
+  const [subDis, setSubDis] = useState(false);
 
   useEffect(() => {
     // abortcontroller - позволяет отменить запрос вручную (встроен в браузер)
@@ -23,7 +24,6 @@ export default function UserContextProvider({ children }) {
     })
       .then((res) => res.json())
       .then((res) => {
-
         // if (res.msg === 'Пользователя не существует!') {
         //   setUser(null);
         // } else {
@@ -44,7 +44,17 @@ export default function UserContextProvider({ children }) {
   }, []);
 
   const value = useMemo(() => ({
-    user, setUser, handleLogout, visibleBtn, setVisibleBtn, score, setScore, modal, setModal,
+    user,
+    setUser,
+    handleLogout,
+    visibleBtn,
+    setVisibleBtn,
+    score,
+    setScore,
+    modal,
+    setModal,
+    subDis,
+    setSubDis,
   }));
 
   return (

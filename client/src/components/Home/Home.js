@@ -14,6 +14,7 @@ import './Home.css';
 // import { increment, decrement, obnulit } from './actiongenerators';
 import MyModal from '../Modal/MyModal';
 import { UserContext } from '../../context/User.context';
+import Score from '../Score/Score';
 
 export default function Home() {
   const { modal, setModal } = useContext(UserContext);
@@ -33,7 +34,9 @@ export default function Home() {
   const [themes, setThemes] = useState([]);
   const num = 10;
   const [timeLeft, setTimeLeft] = useState(num);
-  const { score, visibleBtn, setVisibleBtn } = useContext(UserContext);
+  const {
+    score, visibleBtn, setVisibleBtn, setSubDis,
+  } = useContext(UserContext);
   // const [isOpen, toggleIsOpen] = useReducer((state) => !state, false);
   useEffect(() => {
     const timerFunc = setTimeout(() => {
@@ -63,7 +66,7 @@ export default function Home() {
 
   return (
     <div className="mainpage usereducer">
-      <div>{score}</div>
+      <div className="score">{localStorage.getItem('score') ? (<>{localStorage.getItem('score')}</>) : (0)}</div>
       <div className="themes">{themes.map((el) => (
         <div className="items">{el.title}:{el.Items?.sort((a, b) => a.value - b.value).map((elt) => (
           <div className="item">
@@ -73,6 +76,7 @@ export default function Home() {
                 className="itembtn"
                 disabled
                 onClick={() => {
+                  setSubDis(false);
                   setModal(true); setModalParams({
                     visible: true, id: elt.id, question: elt.question, value: elt.value,
                   }); setTimeLeft(15);
@@ -86,6 +90,7 @@ export default function Home() {
                 id={elt.id}
                 disabled={visibleBtn.includes(elt.id)}
                 onClick={() => {
+                  setSubDis(false);
                   setVisibleBtn([...visibleBtn, elt.id]);
                   setModal(true); setTimeLeft(10); setModalParams({
                     visible: true, id: elt.id, question: elt.question, value: elt.value,

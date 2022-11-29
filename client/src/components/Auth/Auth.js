@@ -4,8 +4,8 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable no-undef */
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/User.context';
-
 // import { useNavigate } from 'react-router-dom';
 import './Auth.css';
 import './toggle.css';
@@ -93,7 +93,7 @@ export default function Auth() {
           <p>Sign In</p>
         </div>
 
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary">Войти</button>
         <div>..</div>
       </form>
     </div>
