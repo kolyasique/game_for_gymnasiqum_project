@@ -31,7 +31,7 @@ export default function Home() {
   //   counter: 0,
   // });
   const [themes, setThemes] = useState([]);
-  const num = 70;
+  const num = 10;
   const [timeLeft, setTimeLeft] = useState(num);
   const { score, visibleBtn, setVisibleBtn } = useContext(UserContext);
   // const [isOpen, toggleIsOpen] = useReducer((state) => !state, false);
@@ -40,6 +40,7 @@ export default function Home() {
       setTimeLeft(timeLeft - 1);
     }, 1000);
     if (timeLeft === 0) {
+      setModal(false);
       return clearTimeout(timerFunc);
     }
     return () => {
@@ -86,7 +87,7 @@ export default function Home() {
                 disabled={visibleBtn.includes(elt.id)}
                 onClick={() => {
                   setVisibleBtn([...visibleBtn, elt.id]);
-                  setModal(true); setTimeLeft(70); setModalParams({
+                  setModal(true); setTimeLeft(10); setModalParams({
                     visible: true, id: elt.id, question: elt.question, value: elt.value,
                   }); console.log('в модал идет:', elt.question, elt.value);
                 }}

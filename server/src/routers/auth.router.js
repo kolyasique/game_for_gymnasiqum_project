@@ -3,16 +3,16 @@ const bcrypt = require('bcrypt');
 
 const { User, Result } = require('../../db/models');
 
-router.get('/', async (req, res) => {
+router.get('/', (req, res) => {
   console.log(req.session)
-  await res.json({ user: {
-    id: req.session.user?.id,
-    name: req.session.user?.name,
-    result_id: req.session.user?.result_id,
-  } || null });
-});
-//   res.json({ user: req.session.user || null });
+//    res.json( {user: {
+//     id: req.session.user?.id,
+//     name: req.session.user?.name,
+//     result_id: req.session.user?.result_id,
+//   } || null });
 // });
+  res.json( req.session.user || null );
+});
 router.post('/signup', async (req, res) => {
   try {
     const { login, password } = req.body;
