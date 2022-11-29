@@ -9,6 +9,7 @@ import { UserContext } from '../../context/User.context';
 // import { useNavigate } from 'react-router-dom';
 import './Auth.css';
 import './toggle.css';
+import log8o from './log8o.png';
 
 const win = window.sessionStorage;
 
@@ -102,12 +103,16 @@ export default function Auth() {
   // </div>
     <div>
       <form className="authform" onSubmit={handleSubmit}>
+        <div className="inf">
+          <img className="log8o" src={log8o} alt="VB" />
+          <p className="inftext">ИГРА</p>
+        </div>
         <div className="form-input">
-          <label className="form-label">Логин</label>
+          <label className="form-label">ЛОГИН</label>
           <input type="text" className="form-control" value={form.login} name="login" onChange={handleInput} />
         </div>
         <div className="form-input">
-          <label className="form-label">Пароль</label>
+          <label className="form-label">ПАРОЛЬ</label>
           <input type="password" className="form-control" value={form.password} name="password" onChange={handleInput} />
         </div>
         <div className="toggle-switch">
@@ -118,7 +123,7 @@ export default function Auth() {
           </div>
           <p className="form-label">Лога</p>
         </div>
-        <button type="submit" className="buttonSubmit">Подтвердить</button>
+        <button type="submit" className="buttonSubmit">ПОДТВЕРДИТЬ</button>
       </form>
     </div>
   );

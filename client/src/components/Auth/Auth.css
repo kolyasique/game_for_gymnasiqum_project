@@ -4,6 +4,7 @@
   
     margin: auto;
     margin-top: 6rem;
+    margin-bottom: 100px;
     padding: 4rem;
     width: 30vw;
     max-width: 500px;
@@ -66,4 +67,24 @@
   letter-spacing: 3px;
   color: #ffffff;
 }
-  
+.inf{
+  display: flex;
+  flex-direction: row;
+}
+  .log8o{
+    width: 100px;
+    position: relative;
+    left: -50px;
+    top: -50px;
+    height: 100px;
+  }
+  .inftext{
+    display: flex;
+    font-size: 48px;
+    font-weight: 400;
+    margin-bottom: -150px;
+    position: relative;
+    top: -50px;
+    color: white;
+    flex-direction: row;
+  }

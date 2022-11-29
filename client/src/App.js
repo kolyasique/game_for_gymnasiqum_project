@@ -17,7 +17,7 @@ function App() {
   return (
     loading ? (
       <div className="spinner-container">
-        <img className="spinner" src="https://i.yapx.ru/GuFC4.gif" alt="spinner" />
+        <img className="spinner" src="https://flevix.com/wp-content/uploads/2019/07/Color-Loading-2.gif" alt="spinner" />
       </div>
     )
       : (
