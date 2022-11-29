@@ -1,0 +1,12 @@
+.threePD{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center
+}
+.threeP{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center
+}

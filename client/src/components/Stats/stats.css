@@ -1,10 +1,28 @@
-.table {
+body{
+  background-image: url('')
+
+}
+.allin{
+  width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-content: space-around;
+  align-items: center;
+  border-radius: 5px;
+}
+div {
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 5px;
 }
 
+table {
+  overflow: hidden;
+  border-radius: 5px;
+  border: 1px solid red;
+}
 TABLE {
   border-collapse: collapse; /* Убираем двойные линии между ячейками */
+  
   width: 300px; /* Ширина таблицы */
  }
  TH, TD {
@@ -14,7 +32,62 @@ TABLE {
  }
  TH {
   background: rgb(218, 255, 148);; /* Цвет фона ячейки */
-  height: 40px; /* Высота ячеек */
+  height: 20px; /* Высота ячеек */
   vertical-align: bottom; /* Выравнивание по нижнему краю */
   padding: 0; /* Убираем поля вокруг текста */
  }
+
+ #overall {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  position: center;
+  width: 80%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5); 
+
+}
+
+#overall td, #overall th {
+  border: 1px solid #ddd;
+  padding: 8px;
+
+}
+
+#overall tr:nth-child(even){background-color: #f2f2f2;}
+
+#overall tr:hover {background-color: #ddd;}
+
+#overall th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #0c0274;
+  color: white;
+}
+
+#personal {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 50px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5); 
+}
+
+#personal td, #personal th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#personal tr:nth-child(even){background-color: #dddddd;}
+
+#personal tr:hover {background-color: #ddd;}
+
+#personal th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #0c0274;
+  color: white;
+}

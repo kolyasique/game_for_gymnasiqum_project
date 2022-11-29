@@ -33,7 +33,7 @@ export default function Header() {
         <>
           <Link to="/"><button className="nav-logout" style={{ textDecoration: 'none' }} type="button">Главная</button></Link>
           <Link to="/stats"><button className="nav-logout" type="button">Статистика</button></Link>
-          <Link to="/"><button className="nav-logout" type="button" onClick={handleLogout}>Exit</button></Link>
+          <Link to="/"><button className="nav-logout" type="button" onClick={handleLogout}>Выйти</button></Link>
         </>
 
       )}

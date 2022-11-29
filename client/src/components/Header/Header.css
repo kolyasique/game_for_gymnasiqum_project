@@ -1,12 +1,12 @@
 .nav {
     display: flex;
     height: 10vh;
-    background: rgb(255, 255, 255);
+    background: rgb(15, 4, 97);
     justify-content: space-between;
     align-items: center;
     padding: 0 3rem;
     margin-bottom: 2rem;
-    border-bottom: 2px solid cadetblue;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5); 
   }
   
   .nav-logo {
@@ -31,10 +31,12 @@
     width: 100px;
     height: 35px;
     font-size: 14px;
-    background-color: rgb(177, 185, 185);
+    font-weight: 200;
+    background-color: rgb(255, 255, 255);
     border-radius: 5px;
-    transition: all 0.5s;
+    transition: all 0.2s;
   }
   .nav-logout:hover {
-    background-color: aquamarine;
+    background-color: rgb(179, 179, 179);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); 
   }

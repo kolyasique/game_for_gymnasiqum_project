@@ -6,14 +6,14 @@
 /* eslint-disable react/jsx-filename-extension */
 
 import React, { useState, useEffect } from 'react';
-import cl from './ModalTimer.module.css';
+import './ModalTimer.css';
 
-export default function ModalTimer({ timeLeft, setVisible }) {
+export default function ModalTimer({ timeLeft }) {
   // setInterval(num - 1, 1000);
 
   return (
-    <div>
-      <p className="threeP">{timeLeft > 0 ? (<>{timeLeft}</>) : (<p>Время вышло!</p>)}</p>
+    <div className="threePD">
+      <div className="threeP">{timeLeft > 0 ? (<>{timeLeft}</>) : (<p>Время вышло!</p>)}</div>
     </div>
   );
 }
