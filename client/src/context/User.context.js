@@ -24,6 +24,7 @@ export default function UserContextProvider({ children }) {
       .then((res) => {
         if (res.msg === 'Пользователя не существует!') {
           setUser(null);
+          setLoading(false);
         } else {
           setUser(res.user);
           setLoading(false);
