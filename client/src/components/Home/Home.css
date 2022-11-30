@@ -55,7 +55,8 @@ color: #ffffff;
 .itembtn:hover{
     background-color:#164c87;
     box-shadow: 0 0 7px rgba(21, 21, 21, 0.5);
-    transition: .2s ease-in-out;
+    transition: .1s ease-in-out;
+    transform: scale(1.1)
 }
 .itembtn:disabled{
     display: flex;
