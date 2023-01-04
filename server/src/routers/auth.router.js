@@ -4,15 +4,14 @@ const bcrypt = require('bcrypt');
 const { User, Result } = require('../../db/models');
 
 router.get('/', (req, res) => {
-
-  console.log(req.session)
-//    res.json( {user: {
-//     id: req.session.user?.id,
-//     name: req.session.user?.name,
-//     result_id: req.session.user?.result_id,
-//   } || null });
-// });
-  res.json( req.session.user || null );
+  console.log(req.session);
+  //    res.json( {user: {
+  //     id: req.session.user?.id,
+  //     name: req.session.user?.name,
+  //     result_id: req.session.user?.result_id,
+  //   } || null });
+  // });
+  res.json(req.session.user || null);
 });
 router.post('/signup', async (req, res) => {
   try {
@@ -25,11 +24,11 @@ router.post('/signup', async (req, res) => {
     delete newUser.createdAt;
     delete newUser.updatedAt;
 
-    const createNewResult = await Result.create({ user_id: newUser.id, total_score: 0 })
+    const createNewResult = await Result.create({ user_id: newUser.id, total_score: 0 });
     req.session.user = {
       id: newUser.id,
       name: newUser.login,
-      result_id: createNewResult.id
+      result_id: createNewResult.id,
     };
     return res.json(newUser);
   } catch (error) {
